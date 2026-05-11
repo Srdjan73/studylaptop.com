@@ -3,67 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StudentLaptop.fit • Perfect Laptop for College 2026</title>
-  <script src="https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcdn.tailwindcss.com%2F&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C2f63fb7a1f0243c9052408deaf32d1fe%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639140829965377728%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=ikslI%2BLKcqwLXhClnORzOEtpu6Xv%2BOriagxgnQYhFL8%3D&reserved=0"></script>
-  <link rel="stylesheet" href="https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcdnjs.cloudflare.com%2Fajax%2Flibs%2Ffont-awesome%2F6.6.0%2Fcss%2Fall.min.css&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C2f63fb7a1f0243c9052408deaf32d1fe%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639140829965430927%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=c8MWV6NaeMTEc8VPhtme6HQBDiv8m%2BVAx8nlGzO%2BQD4%3D&reserved=0">
-  <style>
-    .tail-container { max-width: 1280px; margin: 0 auto; }
-    .card-hover:hover { transform: translateY(-8px); }
-  </style>
+  <title>StudentLaptop.fit • Perfect Laptop for College</title>
+  <script src="https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcdn.tailwindcss.com%2F&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C0aca41e3bb0f43d0ed1408deaf3cc0aa%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639140872719976430%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=oytGhtLvs1JIxkXLpKi5imhYE0H5us5fYkht%2F%2BJjBNg%3D&reserved=0"></script>
+  <link rel="stylesheet" href="https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcdnjs.cloudflare.com%2Fajax%2Flibs%2Ffont-awesome%2F6.6.0%2Fcss%2Fall.min.css&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C0aca41e3bb0f43d0ed1408deaf3cc0aa%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639140872720032120%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=NBTeRiY6L9Yc6kCHt8ih76zAu%2BQR2nHAOo53NXJZE1g%3D&reserved=0">
 </head>
-<body class="bg-zinc-950 text-zinc-100 dark:bg-zinc-950 dark:text-zinc-100 transition-colors">
-  <div class="tail-container p-6">
-    <!-- Header -->
+<body class="bg-zinc-950 text-zinc-100">
+  <div class="max-w-7xl mx-auto p-6">
     <header class="flex justify-between items-center py-8 border-b border-zinc-800">
-      <div>
-        <h1 class="text-4xl font-bold flex items-center gap-3">
-          🎓 StudentLaptop.fit
-        </h1>
-        <p class="text-zinc-400">Find your perfect college laptop in seconds</p>
-      </div>
-      <button id="themeToggle" class="p-3 rounded-2xl bg-zinc-900 hover:bg-zinc-800 transition">
+      <h1 class="text-4xl font-bold">🎓 StudentLaptop.fit</h1>
+      <button id="themeToggle" class="p-3 rounded-2xl bg-zinc-900 hover:bg-zinc-800">
         <i class="fas fa-moon text-xl"></i>
       </button>
     </header>
 
     <!-- Quiz -->
     <div id="quiz" class="max-w-3xl mx-auto mt-12">
-      <div class="bg-zinc-900 rounded-3xl p-10 shadow-2xl">
-        <h2 class="text-3xl font-semibold mb-10 text-center">Tell us about your student life</h2>
+      <div class="bg-zinc-900 rounded-3xl p-10">
+        <h2 class="text-3xl font-semibold mb-10 text-center">Tell us about your studies</h2>
 
         <div class="space-y-10">
-          <!-- Budget -->
           <div>
-            <label class="block text-sm mb-3">Budget (USD)</label>
-            <input type="range" id="budget" min="400" max="2200" value="950" step="50"
-                   class="w-full accent-emerald-500">
-            <div class="flex justify-between text-sm mt-1 text-zinc-400">
-              <span>$400</span>
-              <span id="budgetValue" class="font-semibold">$950</span>
-              <span>$2200+</span>
+            <label class="block text-sm mb-3">Budget</label>
+            <input type="range" id="budget" min="400" max="2200" value="950" step="50" class="w-full accent-emerald-500">
+            <div class="flex justify-between text-sm mt-1">
+              <span>$400 / €370</span>
+              <span id="budgetValue" class="font-semibold">$950 / €880</span>
+              <span>$2200+ / €2040+</span>
             </div>
           </div>
 
           <!-- Major -->
           <div>
-            <label class="block text-sm mb-3">Your Major / Field</label>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-              <button onclick="selectMajor(this)" data-major="general" class="major-btn px-6 py-5 rounded-2xl bg-zinc-800 hover:bg-zinc-700 transition text-left">General / Business</button>
-              <button onclick="selectMajor(this)" data-major="engineering" class="major-btn px-6 py-5 rounded-2xl bg-zinc-800 hover:bg-zinc-700 transition text-left">Engineering / CS</button>
-              <button onclick="selectMajor(this)" data-major="design" class="major-btn px-6 py-5 rounded-2xl bg-zinc-800 hover:bg-zinc-700 transition text-left">Design / Creative</button>
-              <button onclick="selectMajor(this)" data-major="other" class="major-btn px-6 py-5 rounded-2xl bg-zinc-800 hover:bg-zinc-700 transition text-left">Nursing / Other</button>
+            <label class="block text-sm mb-3">Your Field</label>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+              <button onclick="selectMajor(this)" data-major="general" class="major-btn px-5 py-4 rounded-2xl bg-zinc-800 hover:bg-zinc-700">General / Business</button>
+              <button onclick="selectMajor(this)" data-major="engineering" class="major-btn px-5 py-4 rounded-2xl bg-zinc-800 hover:bg-zinc-700">Engineering / CS</button>
+              <button onclick="selectMajor(this)" data-major="design" class="major-btn px-5 py-4 rounded-2xl bg-zinc-800 hover:bg-zinc-700">Design / Creative</button>
+              <button onclick="selectMajor(this)" data-major="learning" class="major-btn px-5 py-4 rounded-2xl bg-zinc-800 hover:bg-zinc-700">Learning / Teaching</button>
+              <button onclick="selectMajor(this)" data-major="other" class="major-btn px-5 py-4 rounded-2xl bg-zinc-800 hover:bg-zinc-700">Other</button>
             </div>
           </div>
 
           <!-- Needs -->
           <div>
-            <label class="block text-sm mb-3">Must-have features (select all)</label>
+            <label class="block text-sm mb-3">Must-haves (select all)</label>
             <div class="grid grid-cols-2 gap-3" id="needs"></div>
           </div>
 
-          <button onclick="getRecommendations()"
-                  class="w-full bg-emerald-600 hover:bg-emerald-500 py-6 rounded-3xl text-xl font-semibold transition text-white">
-            Show My Laptop Recommendations →
+          <button onclick="getRecommendations()" class="w-full bg-emerald-600 hover:bg-emerald-500 py-6 rounded-3xl text-xl font-semibold">
+            Show My Recommendations →
           </button>
         </div>
       </div>
@@ -71,56 +59,108 @@
 
     <!-- Results -->
     <div id="results" class="hidden mt-16">
-      <div class="flex justify-between items-center mb-8">
-        <h2 class="text-4xl font-bold">Your Top Matches</h2>
-        <button onclick="resetQuiz()" class="text-emerald-400 hover:text-emerald-300 flex items-center gap-2">
-          <i class="fas fa-redo"></i> Start Over
-        </button>
-      </div>
-
+      <h2 class="text-4xl font-bold mb-8 text-center">Your Top Recommendations</h2>
       <div id="recommendations" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
 
-      <!-- Comparison Table -->
       <div class="mt-16">
         <h3 class="text-2xl font-semibold mb-6">Side-by-Side Comparison</h3>
         <div class="overflow-x-auto">
-          <table id="comparisonTable" class="w-full text-sm border-collapse"></table>
+          <table id="comparisonTable" class="w-full"></table>
         </div>
       </div>
 
-      <!-- Share -->
-      <div class="mt-12 text-center">
-        <p class="text-zinc-400 mb-4">Share your results</p>
-        <div id="shareButtons" class="flex justify-center gap-4"></div>
+      <div class="text-center mt-12">
+        <button onclick="resetQuiz()" class="text-emerald-400 hover:text-emerald-300">← Start Over</button>
       </div>
     </div>
   </div>
 
   <script>
-    const laptops = [
-      {id:1, name:"MacBook Air 13 M4", price:999, weight:1.24, battery:18, score:96, bestFor:"general,design", pros:"Best battery & build", link:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.com%2Fs%3Fk%3Dmacbook%2Bair%2Bm4%26tag%3DYOURTAG&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C2f63fb7a1f0243c9052408deaf32d1fe%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639140829965483777%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=ObcuCDDPMeaLX62Cb0DQp%2Bd8QjDEkmdmeTznXma79Ik%3D&reserved=0"},
-      {id:2, name:"Lenovo Yoga 7i 14", price:849, weight:1.45, battery:14, score:93, bestFor:"general,design", pros:"2-in-1 touchscreen", link:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.com%2Fs%3Fk%3Dlenovo%2Byoga%2B7i%26tag%3DYOURTAG&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C2f63fb7a1f0243c9052408deaf32d1fe%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639140829965546099%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=JvtHhTBS%2BSjqi260hRVwr0BgEBDGnYaR8FBF%2Bjfsd6c%3D&reserved=0"},
-      {id:3, name:"HP OmniBook 5 14", price:749, weight:1.35, battery:13, score:91, bestFor:"general,engineering", pros:"Great value & ports", link:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.com%2Fs%3Fk%3Dhp%2Bomnibook%2B5%26tag%3DYOURTAG&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C2f63fb7a1f0243c9052408deaf32d1fe%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639140829965605979%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=jVf1ZnM%2Bcmm0LjkoUyHSyZo9pzAy8wY8l3iN9XOujM0%3D&reserved=0"},
-      {id:4, name:"ASUS Zenbook 14 OLED", price:1099, weight:1.2, battery:15, score:94, bestFor:"design,engineering", pros:"Stunning OLED screen", link:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.com%2Fs%3Fk%3Dasus%2Bzenbook%2B14%26tag%3DYOURTAG&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C2f63fb7a1f0243c9052408deaf32d1fe%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639140829965693082%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=wvdPo40ZbHueGLoXw%2Bln9akzhnpPe6IqTZS8uqmgLG8%3D&reserved=0"},
-      {id:5, name:"Dell XPS 13", price:1199, weight:1.17, battery:12, score:90, bestFor:"general", pros:"Premium feel", link:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.com%2Fs%3Fk%3Ddell%2Bxps%2B13%26tag%3DYOURTAG&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C2f63fb7a1f0243c9052408deaf32d1fe%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639140829965757247%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=9NSKkvmYQM38PeY9nIT5TiEgPbhb3jthTS0%2FkKIQj28%3D&reserved=0"},
-      {id:6, name:"Acer Swift Go 14", price:649, weight:1.3, battery:11, score:87, bestFor:"general,engineering", pros:"Best under $700", link:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.com%2Fs%3Fk%3Dacer%2Bswift%2Bgo%26tag%3DYOURTAG&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C2f63fb7a1f0243c9052408deaf32d1fe%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639140829965816739%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=C4NAoSyYzW%2FoLAsJ9iqX7QGtVo6KIgS%2FVOUWt3nd06Q%3D&reserved=0"},
-      {id:7, name:"Microsoft Surface Laptop 7", price:999, weight:1.34, battery:14, score:89, bestFor:"general", pros:"Beautiful design", link:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.com%2Fs%3Fk%3Dsurface%2Blaptop%2B7%26tag%3DYOURTAG&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C2f63fb7a1f0243c9052408deaf32d1fe%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639140829965870201%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=URfWkui5dhFGrWVPzIvn3%2BIUYS9tsiIz1G3cyoiXgxU%3D&reserved=0"}
+    // Laptop database with images + country links
+    let laptops = [
+      {
+        name: "MacBook Air 13 M4",
+        priceUSD: 999,
+        priceEUR: 949,
+        weight: 1.24,
+        battery: 18,
+        screen: "13.6\"",
+        keyboard: "US / DE available",
+        image: "https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fpicsum.photos%2Fid%2F20%2F600%2F400&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C0aca41e3bb0f43d0ed1408deaf3cc0aa%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639140872720078912%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=A0WCwhhdCzuc8nW3vdrTT3SUV8fJe%2BC3X7n6HPvwL5I%3D&reserved=0",
+        pros: "Best battery & build quality",
+        usLink: "https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.com%2Fs%3Fk%3Dmacbook%2Bair%2Bm4&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C0aca41e3bb0f43d0ed1408deaf3cc0aa%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639140872720121636%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=kPvoehrFdsNELdxRBC%2FV8rPlq02jYMHvEnNDAqZL4LY%3D&reserved=0",
+        euLink: "https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.de%2Fs%3Fk%3Dmacbook%2Bair%2Bm4&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C0aca41e3bb0f43d0ed1408deaf3cc0aa%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639140872720171746%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=LDriHT5XTgZMFFtZ77rnUgapWqMunanEy6cFTm2DIVE%3D&reserved=0"
+      },
+      {
+        name: "Lenovo Yoga 7i 14",
+        priceUSD: 849,
+        priceEUR: 799,
+        weight: 1.45,
+        battery: 14,
+        screen: "14\"",
+        keyboard: "US / DE available",
+        image: "https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fpicsum.photos%2Fid%2F201%2F600%2F400&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C0aca41e3bb0f43d0ed1408deaf3cc0aa%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639140872720205784%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=2WzO%2Fi1zJdkiYUZRnqY4VogdSpzDSMm1r3hcLtmqNo8%3D&reserved=0",
+        pros: "Excellent 2-in-1 touchscreen",
+        usLink: "https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.com%2Fs%3Fk%3Dlenovo%2Byoga%2B7i&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C0aca41e3bb0f43d0ed1408deaf3cc0aa%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639140872720237170%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=q7XAkIrrMdTKUbiCN1Z%2B3aL0WIiMPeoeVCy662oB6PU%3D&reserved=0",
+        euLink: "https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.de%2Fs%3Fk%3Dlenovo%2Byoga%2B7i&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C0aca41e3bb0f43d0ed1408deaf3cc0aa%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639140872720268172%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=C%2BZI2ZNJh2iAPGeC%2B29xMXViBqMuWjRIoey%2FYQMuzec%3D&reserved=0"
+      },
+      {
+        name: "HP OmniBook 5 14",
+        priceUSD: 749,
+        priceEUR: 699,
+        weight: 1.35,
+        battery: 13,
+        screen: "14\"",
+        keyboard: "US / DE available",
+        image: "https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fpicsum.photos%2Fid%2F180%2F600%2F400&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C0aca41e3bb0f43d0ed1408deaf3cc0aa%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639140872720309061%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=g70H56R1t%2BDeKePldf%2BCcmFMnTiFztt2XD8mcZ6KKmE%3D&reserved=0",
+        pros: "Great value & ports",
+        usLink: "https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.com%2Fs%3Fk%3Dhp%2Bomnibook&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C0aca41e3bb0f43d0ed1408deaf3cc0aa%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639140872720367868%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=jlpF1A2GJmFbYacxqCtpoQI9xsyg%2FzYn54Y7ga85CPE%3D&reserved=0",
+        euLink: "https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.de%2Fs%3Fk%3Dhp%2Bomnibook&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C0aca41e3bb0f43d0ed1408deaf3cc0aa%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639140872720429155%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=6zjol9GB9A9rb9WdiXd6qq8ZaoRO5Ipj%2B6yz%2BDn1gPM%3D&reserved=0"
+      },
+      {
+        name: "ASUS Zenbook 14 OLED",
+        priceUSD: 1099,
+        priceEUR: 1049,
+        weight: 1.2,
+        battery: 15,
+        screen: "14\"",
+        keyboard: "US / DE available",
+        image: "https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fpicsum.photos%2Fid%2F251%2F600%2F400&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C0aca41e3bb0f43d0ed1408deaf3cc0aa%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639140872720474615%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=PicIMsER0Rj9kcp29%2BTTTPoFdJlAcuMwj2Rk9H2r7fI%3D&reserved=0",
+        pros: "Stunning OLED display",
+        usLink: "https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.com%2Fs%3Fk%3Dasus%2Bzenbook%2B14&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C0aca41e3bb0f43d0ed1408deaf3cc0aa%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639140872720505810%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=FN7HHm506Ee%2BE%2BGCftqUt9PaLG5B6QubwWndeGMOswQ%3D&reserved=0",
+        euLink: "https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.de%2Fs%3Fk%3Dasus%2Bzenbook%2B14&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C0aca41e3bb0f43d0ed1408deaf3cc0aa%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639140872720531810%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=XMPRxpCxkwJ0eOfdRlpQUj3laljJ329tOsj%2Ba3r1BXY%3D&reserved=0"
+      }
     ];
 
     let selectedMajor = null;
     let selectedNeeds = [];
+    let userCurrency = 'USD';
+    let userCountry = 'US';
 
     const needsOptions = [
       {id:"portable", label:"Very lightweight (<1.4kg)"},
       {id:"battery", label:"Long battery life"},
-      {id:"power", label:"Powerful (coding / editing)"},
+      {id:"power", label:"Powerful processor"},
       {id:"screen", label:"Excellent screen"},
-      {id:"touch", label:"Touch / 2-in-1"}
+      {id:"touch", label:"Touch / 2-in-1"},
+      {id:"keyboard", label:"Specific keyboard layout"},
+      {id:"size", label:"Specific screen size"}
     ];
+
+    async function detectLocation() {
+      try {
+        const res = await fetch('https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fipapi.co%2Fjson%2F&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C0aca41e3bb0f43d0ed1408deaf3cc0aa%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639140872720555576%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=YJieh8pajpXiovRsiYv%2FXOXYo%2F%2B6qHXpg2AwR6HlD8Y%3D&reserved=0');
+        const data = await res.json();
+        userCountry = data.country_code || 'US';
+        userCurrency = (userCountry === 'DE' || userCountry === 'FR' || userCountry === 'IT' || userCountry === 'ES' || ['EU','AT','BE','NL'].includes(userCountry)) ? 'EUR' : 'USD';
+      } catch(e) {
+        console.log("Location detection failed, defaulting to USD");
+      }
+    }
 
     function populateNeeds() {
       document.getElementById('needs').innerHTML = needsOptions.map(n => `
-        <label onclick="toggleNeed(this)" data-need="${n.id}" class="need-btn flex items-center gap-3 p-5 bg-zinc-800 rounded-2xl cursor-pointer hover:bg-zinc-700 transition">
+        <label onclick="toggleNeed(this)" data-need="${n.id}" class="need-btn flex items-center gap-3 p-5 bg-zinc-800 rounded-2xl cursor-pointer hover:bg-zinc-700">
           <input type="checkbox" class="w-5 h-5 accent-emerald-500">
           <span>${n.label}</span>
         </label>
@@ -145,109 +185,94 @@
     }
 
     function getRecommendations() {
+      if (!selectedMajor) return alert("Please select your field");
+
       const budget = parseInt(document.getElementById('budget').value);
-      if (!selectedMajor) return alert("Please select your major");
+      const isEUR = userCurrency === 'EUR';
 
       const results = laptops
-        .filter(l => l.price <= budget + 400)
+        .filter(l => (isEUR ? l.priceEUR : l.priceUSD) <= budget + 400)
         .map(l => {
-          let score = l.score;
-          if (selectedMajor === 'engineering' && l.bestFor.includes('engineering')) score += 12;
-          if (selectedMajor === 'design' && l.bestFor.includes('design')) score += 12;
-          if (selectedNeeds.includes('portable') && l.weight < 1.35) score += 8;
-          if (selectedNeeds.includes('battery') && l.battery > 13) score += 8;
+          let score = 85;
+          if (selectedMajor === 'engineering' && l.name.includes('Yoga') || l.name.includes('Zenbook')) score += 12;
+          if (selectedMajor === 'design' && l.name.includes('Zenbook') || l.name.includes('MacBook')) score += 12;
+          if (selectedMajor === 'learning') score += 8;
           return {...l, matchScore: Math.min(99, score)};
         })
         .sort((a,b) => b.matchScore - a.matchScore)
         .slice(0, 6);
 
-      renderResults(results, budget);
+      renderResults(results);
     }
 
-    function renderResults(results, budget) {
+    function renderResults(results) {
       document.getElementById('quiz').classList.add('hidden');
       document.getElementById('results').classList.remove('hidden');
 
       const container = document.getElementById('recommendations');
-      container.innerHTML = results.map(l => `
-        <div class="bg-zinc-900 rounded-3xl p-8 card-hover transition">
-          <div class="text-6xl mb-4">💻</div>
-          <h3 class="font-bold text-2xl">${l.name}</h3>
-          <p class="text-4xl font-semibold text-emerald-400 mt-3">$${l.price}</p>
-          <p class="text-zinc-400 my-5">${l.pros}</p>
-          <a href="${l.link}" target="_blank" class="block text-center bg-white text-zinc-900 py-4 rounded-2xl font-semibold hover:bg-emerald-400 transition">
-            View Deal →
-          </a>
-          <p class="text-center text-xs text-emerald-400 mt-6">${l.matchScore}% match</p>
-        </div>
-      `).join('');
+      container.innerHTML = results.map(l => {
+        const price = userCurrency === 'EUR' ? l.priceEUR : l.priceUSD;
+        const link = userCurrency === 'EUR' ? l.euLink : l.usLink;
+        return `
+          <div class="bg-zinc-900 rounded-3xl p-8 hover:scale-105 transition">
+            <img src="${l.image}" class="w-full h-48 object-cover rounded-2xl mb-6">
+            <h3 class="font-bold text-2xl">${l.name}</h3>
+            <p class="text-4xl font-semibold text-emerald-400 mt-3">${userCurrency === 'EUR' ? '€' : '$'}${price}</p>
+            <p class="text-zinc-400 my-5">${l.pros}</p>
+            <a href="${link}" target="_blank" class="block text-center bg-white text-zinc-900 py-4 rounded-2xl font-semibold hover:bg-emerald-400">View Local Offer →</a>
+          </div>`;
+      }).join('');
 
       renderComparisonTable(results);
-      renderShareButtons(results);
     }
 
     function renderComparisonTable(results) {
-      let html = `
-        <thead><tr class="bg-zinc-800">
-          <th class="p-4 text-left">Model</th>
-          <th class="p-4">Price</th>
-          <th class="p-4">Weight</th>
-          <th class="p-4">Battery</th>
-          <th class="p-4">Match</th>
-        </tr></thead><tbody>`;
+      let html = `<thead><tr class="bg-zinc-800 text-left">
+        <th class="p-4">Model</th>
+        <th class="p-4">Price</th>
+        <th class="p-4">Screen</th>
+        <th class="p-4">Battery</th>
+        <th class="p-4">Match</th>
+      </tr></thead><tbody>`;
 
       results.forEach(l => {
+        const price = userCurrency === 'EUR' ? l.priceEUR : l.priceUSD;
         html += `
           <tr class="border-t border-zinc-800">
-            <td class="p-4 font-medium">${l.name}</td>
-            <td class="p-4 text-center">$${l.price}</td>
-            <td class="p-4 text-center">${l.weight} kg</td>
-            <td class="p-4 text-center">${l.battery}h</td>
-            <td class="p-4 text-center font-bold text-emerald-400">${l.matchScore}%</td>
+            <td class="p-4">
+              <img src="${l.image}" class="w-20 h-12 object-cover rounded inline mr-3">
+              ${l.name}
+            </td>
+            <td class="p-4 font-semibold">${userCurrency === 'EUR' ? '€' : '$'}${price}</td>
+            <td class="p-4">${l.screen}</td>
+            <td class="p-4">${l.battery}h</td>
+            <td class="p-4 font-bold text-emerald-400">${l.matchScore}%</td>
           </tr>`;
       });
       html += `</tbody>`;
       document.getElementById('comparisonTable').innerHTML = html;
     }
 
-    function renderShareButtons(results) {
-      const text = `I found my perfect student laptop using StudentLaptop.fit!`;
-      const url = window.location.href;
-
-      document.getElementById('shareButtons').innerHTML = `
-        <a href="https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Ftwitter.com%2Fintent%2Ftweet%3Ftext%3D%24&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C2f63fb7a1f0243c9052408deaf32d1fe%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639140829965915071%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=%2FLAK2N6CaLZP4xvehf4sWe8aHAgdfTWB3o92Tb8Xn%2Fw%3D&reserved=0{encodeURIComponent(text)}&url=${encodeURIComponent(url)}" target="_blank" class="px-6 py-3 bg-black rounded-2xl hover:bg-zinc-800">𝕏</a>
-        <a href="https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.facebook.com%2Fsharer%2Fsharer.php%3Fu%3D%24&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C2f63fb7a1f0243c9052408deaf32d1fe%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639140829965967481%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=rrXKdXP6MOofFcUCIm26SB0PSVXfIDXl56%2Fj5YylGFQ%3D&reserved=0{encodeURIComponent(url)}" target="_blank" class="px-6 py-3 bg-blue-600 rounded-2xl hover:bg-blue-700">f</a>
-        <button onclick="copyLink()" class="px-6 py-3 bg-zinc-800 rounded-2xl hover:bg-zinc-700">📋 Copy Link</button>
-      `;
-    }
-
-    function copyLink() {
-      navigator.clipboard.writeText(window.location.href);
-      alert("Link copied! Share it with friends.");
-    }
-
     function resetQuiz() {
       document.getElementById('quiz').classList.remove('hidden');
       document.getElementById('results').classList.add('hidden');
-      selectedMajor = null;
-      selectedNeeds = [];
+      selectedMajor = null; selectedNeeds = [];
       document.querySelectorAll('.major-btn, .need-btn').forEach(el => el.classList.remove('bg-emerald-600','text-white'));
     }
 
-    // Theme Toggle
-    const toggle = document.getElementById('themeToggle');
-    toggle.addEventListener('click', () => {
+    // Theme toggle + budget live update
+    document.getElementById('themeToggle').addEventListener('click', () => {
       document.documentElement.classList.toggle('dark');
-      toggle.innerHTML = document.documentElement.classList.contains('dark') ?
-        '<i class="fas fa-sun text-xl"></i>' : '<i class="fas fa-moon text-xl"></i>';
     });
 
-    // Budget live update
     document.getElementById('budget').addEventListener('input', function() {
-      document.getElementById('budgetValue').textContent = '$' + this.value;
+      document.getElementById('budgetValue').textContent =
+        userCurrency === 'EUR' ? `€${Math.round(this.value * 0.92)}` : `$${this.value}`;
     });
 
-    window.onload = () => {
+    // Init
+    window.onload = async () => {
+      await detectLocation();
       populateNeeds();
     };
   </script>
