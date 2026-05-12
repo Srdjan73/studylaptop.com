@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Find the best laptop for your major, budget and campus life. Personalized recommendations with local prices from Amazon, MediaMarkt, Best Buy.">
+  <meta name="keywords" content="best laptop for students, college laptop, engineering laptop, design laptop, student laptop 2026">
+  <title>StudyLaptop.com • Best Student Laptops 2026</title>
+  <script src="https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcdn.tailwindcss.com%2F&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743614681315%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=NrpzF%2FsY9KtHAA7CJ9osxgBS8BFYF2%2FUbNiVWzyFajg%3D&reserved=0"></script>
+  <link rel="stylesheet" href="https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcdnjs.cloudflare.com%2Fajax%2Flibs%2Ffont-awesome%2F6.6.0%2Fcss%2Fall.min.css&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743614746178%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=wwAEcSJhqe1QZKF6iVutvNeGIqyYC4edcV8Tr6SEQjY%3D&reserved=0">
+</head>
+<body class="bg-zinc-950 text-zinc-100 transition-colors">
+  <div class="max-w-7xl mx-auto p-4 md:p-6">
+
+    <!-- Header -->
+    <header class="text-center py-8 md:py-12 border-b border-zinc-800">
+      <h1 class="text-4xl md:text-5xl font-bold mb-3">🎓 StudyLaptop.com</h1>
+      <h2 class="text-2xl md:text-3xl font-semibold text-emerald-400 mb-4">Student Laptop Matcher & Budget Optimizer</h2>
+      <p class="max-w-2xl mx-auto text-zinc-400 text-base md:text-lg">
+        Find the perfect laptop for your major, budget, and campus life in seconds.
+      </p>
+    </header>
+
+    <!-- Quiz -->
+    <div id="quiz" class="max-w-3xl mx-auto mt-10">
+      <div class="bg-zinc-900 rounded-3xl p-6 md:p-10">
+        <div class="flex justify-end mb-6">
+          <button id="themeToggle" class="p-3 rounded-2xl bg-zinc-800 hover:bg-zinc-700 transition">
+            <i class="fas fa-moon text-xl"></i>
+          </button>
+        </div>
+
+        <h2 class="text-2xl md:text-3xl font-semibold mb-8 text-center">Tell us about your studies</h2>
+
+        <div class="space-y-8 md:space-y-10">
+          <div>
+            <label class="block text-sm mb-3">Your Budget</label>
+            <input type="range" id="budget" min="400" max="2500" value="950" step="50" class="w-full accent-emerald-500">
+            <div class="flex justify-between text-sm mt-1 text-zinc-400">
+              <span>$400 / €370</span>
+              <span id="budgetValue" class="font-semibold">$950 / €880</span>
+              <span>$2500+ / €2300+</span>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm mb-3">Your Field of Study</label>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-3" id="majorButtons"></div>
+          </div>
+
+          <div>
+            <label class="block text-sm mb-3">Preferred Operating System</label>
+            <div class="grid grid-cols-3 gap-3" id="osButtons"></div>
+          </div>
+
+          <div>
+            <label class="block text-sm mb-3">Must-haves (select all)</label>
+            <div class="grid grid-cols-2 gap-3" id="needs"></div>
+          </div>
+
+          <button onclick="getRecommendations()"
+                  class="w-full bg-emerald-600 hover:bg-emerald-500 py-6 rounded-3xl text-lg md:text-xl font-semibold transition">
+            Show My Recommendations →
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div id="results" class="hidden mt-12 md:mt-16">
+      <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">Your Top Recommendations</h2>
+      <div id="recommendations" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"></div>
+
+      <div class="mt-12 flex flex-wrap justify-center gap-4">
+        <button onclick="shareOnX()" class="flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 px-6 py-3 rounded-2xl transition">
+          <i class="fab fa-x-twitter"></i> X
+        </button>
+        <button onclick="shareOnFacebook()" class="flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 px-6 py-3 rounded-2xl transition">
+          <i class="fab fa-facebook-f"></i> Facebook
+        </button>
+        <button onclick="copyLink()" class="flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 px-6 py-3 rounded-2xl transition">
+          <i class="fas fa-link"></i> Copy Link
+        </button>
+      </div>
+
+      <div class="text-center mt-10">
+        <button onclick="resetQuiz()" class="text-emerald-400 hover:text-emerald-300">← Start Over</button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center text-zinc-500 text-sm mt-20 border-t border-zinc-800 pt-8">
+      <p>Last updated: <span id="lastUpdated"></span></p>
+      <div class="mt-4 flex flex-wrap justify-center gap-6 text-xs">
+        <a href="#" class="hover:text-zinc-300">About</a>
+        <a href="#" class="hover:text-zinc-300">Privacy Policy</a>
+        <a href="#" class="hover:text-zinc-300">Terms</a>
+        <a href="#" class="hover:text-zinc-300">Affiliate Disclosure</a>
+      </div>
+      <p class="mt-6 text-xs">
+        This website participates in affiliate programs (Amazon Associates, MediaMarkt, Best Buy, etc.).
+        We may earn a commission from qualifying purchases at no extra cost to you.
+      </p>
+    </footer>
+  </div>
+
+  <!-- Laptop Detail Modal -->
+  <div id="detailModal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+    <div class="bg-zinc-900 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-auto">
+      <div class="p-6">
+        <button onclick="closeModal()" class="float-right text-3xl text-zinc-400 hover:text-white">&times;</button>
+        <div id="modalContent"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let selectedMajor = null;
+    let selectedOS = "any";
+    let selectedNeeds = [];
+    let userCurrency = 'USD';
+    let userCountry = 'US';
+
+    const majors = [
+      {id: "general", label: "General / Business"},
+      {id: "engineering", label: "Engineering / CS"},
+      {id: "design", label: "Design / Creative"},
+      {id: "learning", label: "Learning / Teaching"},
+      {id: "other", label: "Other"}
+    ];
+
+    const osOptions = [
+      {id: "any", label: "Any"},
+      {id: "windows", label: "Windows"},
+      {id: "macos", label: "macOS"}
+    ];
+
+    const needsOptions = [
+      {id:"portable", label:"Very lightweight (<1.4kg)"},
+      {id:"battery", label:"Long battery life"},
+      {id:"power", label:"Powerful processor"},
+      {id:"screen", label:"Specific screen size"},
+      {id:"touch", label:"Touch / 2-in-1"},
+      {id:"keyboard", label:"Specific keyboard layout"},
+      {id:"size", label:"Large screen (>15\")"}
+    ];
+
+    const laptops = [
+      {name: "Apple MacBook Air 13 M4", os:"macos", priceUSD:999, priceEUR:949, weight:1.24, battery:18, screen:"13.6\"", color:"Midnight", image:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fpicsum.photos%2Fid%2F20%2F800%2F600&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743614810878%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=xk4ynsrYZ2%2B17E18O02%2FX%2FBn5%2FXXDLy96X27IqwtBgs%3D&reserved=0", pros:"Best battery & build", links:{amazonUS:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.com%2Fs%3Fk%3Dmacbook%2Bair%2Bm4%26tag%3DYOURTAG&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743614877042%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=S9U9sr67F6eH5xaCiM15ZJgu0Fuz1i1pKtcIl1R3c9g%3D&reserved=0", bestbuy:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fbestbuy.com%2Fsite%2Fsearchpage.jsp%3Fst%3Dmacbook%2Bair%2Bm4&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743614947325%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=%2BeK%2BwXHg11UfcBKmPWpD4OWidpJgknHYArQjtkZxC6M%3D&reserved=0", amazonDE:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.de%2Fs%3Fk%3Dmacbook%2Bair%2Bm4&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743615019003%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=s9yD7bvOmQh37jKsNxguFnabz7NlzlOIT3iPiWi4vSQ%3D&reserved=0", mediamarkt:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.mediamarkt.de%2Fde%2Fsearch.html%3Fquery%3Dmacbook%2Bair%2Bm4&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743615080352%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=qL5rLkgww5IKZFDW%2F9iqcj5pDNjv%2BjK7vg4S4bb0I0o%3D&reserved=0"}},
+      {name: "Apple MacBook Pro 14 M4", os:"macos", priceUSD:1599, priceEUR:1499, weight:1.55, battery:16, screen:"14.2\"", color:"Space Black", image:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fpicsum.photos%2Fid%2F201%2F800%2F600&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743615142765%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=sY%2FHCwYVoonyt05DxNPI4l4ZShu92d%2FbstDpmA%2FNIWI%3D&reserved=0", pros:"Powerful for creative work", links:{amazonUS:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.com%2Fs%3Fk%3Dmacbook%2Bpro%2Bm4%26tag%3DYOURTAG&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743615207025%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=ve0RvCbrUcVsDYkEdDxpnG6Yz1qSL6kZnPZzuCJyKgI%3D&reserved=0", bestbuy:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fbestbuy.com%2Fsite%2Fsearchpage.jsp%3Fst%3Dmacbook%2Bpro&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743615556223%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=I3ekzct5X%2BbQg9qQDFcwP38yHWCRip6Xo%2B51VkR%2B9oI%3D&reserved=0", amazonDE:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.de%2Fs%3Fk%3Dmacbook%2Bpro%2Bm4&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743615639734%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=WYovfiAhjJL41CsWB%2FSP%2BF5oN2Ver5N%2BgR%2Ba%2Fo7r0hw%3D&reserved=0", mediamarkt:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.mediamarkt.de%2Fde%2Fsearch.html%3Fquery%3Dmacbook%2Bpro%2Bm4&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743615700223%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=8tQcvEmIM0Om453idXd%2BH3AVXnAbYsXbovfTXFTxrfM%3D&reserved=0"}},
+      {name: "Lenovo Yoga Slim 7i", os:"windows", priceUSD:899, priceEUR:849, weight:1.35, battery:15, screen:"14\"", color:"Storm Grey", image:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fpicsum.photos%2Fid%2F180%2F800%2F600&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743615782315%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=M5FIlddCRdpER4yd1TG3PNd87AtdMJ3cb153L3GbwS0%3D&reserved=0", pros:"Excellent 2-in-1", links:{amazonUS:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.com%2Fs%3Fk%3Dlenovo%2Byoga%2Bslim%2B7i%26tag%3DYOURTAG&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743615916915%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=S4ufr5qAR5HXJcblFPXUQAtrFnUM8xzez1DlyuEMemU%3D&reserved=0", bestbuy:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fbestbuy.com%2Fsite%2Fsearchpage.jsp%3Fst%3Dlenovo%2Byoga&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743616011751%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=18dPEJXcOp6JYDdR%2BpJIQYG7CeTCV9p3ve5mGQ1naPo%3D&reserved=0", amazonDE:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.de%2Fs%3Fk%3Dlenovo%2Byoga%2B7i&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743616182515%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=3NRX1F8%2BmzQlIaBdl%2B%2F8Q4LF5rv%2BpUOaw0Y6nmU8cSE%3D&reserved=0", mediamarkt:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.mediamarkt.de%2Fde%2Fsearch.html%3Fquery%3Dlenovo%2Byoga%2B7i&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743616267725%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=uRQUTL177zqIqtJ0X3vpFkI7yE%2BKI38tBWdRYLg69DU%3D&reserved=0"}},
+      {name: "HP OmniBook 5 14", os:"windows", priceUSD:749, priceEUR:699, weight:1.35, battery:13, screen:"14\"", color:"Silver", image:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fpicsum.photos%2Fid%2F251%2F800%2F600&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743616420075%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=kU3xADYrM8JVIn8t%2BuM3CH76%2BiK71ZDKXkOhZDjIQzI%3D&reserved=0", pros:"Great value", links:{amazonUS:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.com%2Fs%3Fk%3Dhp%2Bomnibook%2B5%26tag%3DYOURTAG&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743616549664%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=YwRNEDMgLk1Clc9Cr1JsPIjxRL%2B6hrZp91Bhkr0iwhI%3D&reserved=0", bestbuy:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fbestbuy.com%2Fsite%2Fsearchpage.jsp%3Fst%3Dhp%2Bomnibook&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743616888703%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=z459y835rlQ%2B7GHBreG%2BvhpTd2u9guNNQScyPVXiEFw%3D&reserved=0", amazonDE:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.de%2Fs%3Fk%3Dhp%2Bomnibook&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743617013580%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=fkkg0qP7z3BDduJe5dPeGB3AGrnTO%2FHK2uJZgMPTtRE%3D&reserved=0", mediamarkt:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.mediamarkt.de%2Fde%2Fsearch.html%3Fquery%3Dhp%2Bomnibook&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743617126257%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=BXslUaKpHvRaC8DD0Vf5iD3oymoLNg%2B0jUVzTVHh%2BdA%3D&reserved=0"}},
+      {name: "ASUS Zenbook 14 OLED", os:"windows", priceUSD:1099, priceEUR:1049, weight:1.2, battery:15, screen:"14\"", color:"Navy Blue", image:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fpicsum.photos%2Fid%2F60%2F800%2F600&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743617229308%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=ThImCxKkjA3UThdjOoUb6GRsuc4Whhk45NssrK7VT44%3D&reserved=0", pros:"Stunning OLED", links:{amazonUS:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.com%2Fs%3Fk%3Dasus%2Bzenbook%2B14%26tag%3DYOURTAG&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743617294965%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=TISwqWn2rCjBveHGB4X1q3nQADMy1%2B8p%2BPJM7U6Gzvg%3D&reserved=0", bestbuy:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fbestbuy.com%2Fsite%2Fsearchpage.jsp%3Fst%3Dasus%2Bzenbook&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743617398151%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=xCBqjH6HGgZg1eJpJuv4p%2BJzDvUZReIZnGedMzrjmlk%3D&reserved=0", amazonDE:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.de%2Fs%3Fk%3Dasus%2Bzenbook%2B14&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743617490264%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=%2Fola4Kn6gpX2Cdk0pKmjiAfq%2FaxBxRnHNCWGVXpbUSM%3D&reserved=0", mediamarkt:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.mediamarkt.de%2Fde%2Fsearch.html%3Fquery%3Dasus%2Bzenbook&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743617553446%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=e3yoSK69iqJfvQRUiN2cf%2B0QItHDowGp9qJibknDo6U%3D&reserved=0"}},
+      {name: "Dell XPS 13", os:"windows", priceUSD:1199, priceEUR:1149, weight:1.17, battery:12, screen:"13.4\"", color:"Platinum", image:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fpicsum.photos%2Fid%2F133%2F800%2F600&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743617623735%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=jDxFJnh4MFc7u72%2BV6YjfMqaNBhiqfQDkJ4u%2B5dnwPo%3D&reserved=0", pros:"Premium Windows", links:{amazonUS:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.com%2Fs%3Fk%3Ddell%2Bxps%2B13%26tag%3DYOURTAG&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743617718979%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=Qu%2BuW80cjxa5NF3LdYTdXWJhE92fL485GIERLMiAGpE%3D&reserved=0", bestbuy:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fbestbuy.com%2Fsite%2Fsearchpage.jsp%3Fst%3Ddell%2Bxps%2B13&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743617799116%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=DBHGGK1%2FItbnWWUGIeO36Hs37Q7lwgpTrpfVBjzOnV4%3D&reserved=0", amazonDE:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.de%2Fs%3Fk%3Ddell%2Bxps%2B13&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743617864688%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=TuY8XTNRG%2BqJd03JKy3BAFPT0gPgpyswQ%2FgMxin05wE%3D&reserved=0", mediamarkt:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.mediamarkt.de%2Fde%2Fsearch.html%3Fquery%3Ddell%2Bxps%2B13&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743617924034%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=Py1hGnZBwdKeG8Es%2FAM%2F%2F0KPeN1%2Fuu%2B3fg1RpOTBE8c%3D&reserved=0"}},
+      {name: "Acer Swift Go 14", os:"windows", priceUSD:649, priceEUR:599, weight:1.3, battery:11, screen:"14\"", color:"Gray", image:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fpicsum.photos%2Fid%2F201%2F800%2F600&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743617980505%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=Iy%2BH1Nw%2F%2FzDAPFpLnQZKI0mml7PVBLqVLnBhfs4gb58%3D&reserved=0", pros:"Best budget", links:{amazonUS:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.com%2Fs%3Fk%3Dacer%2Bswift%2Bgo%26tag%3DYOURTAG&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743618044669%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=eQ83zUwltO%2BkVM6vqgfUH%2BCVjx6n3jB8zGB06g0eaIA%3D&reserved=0", bestbuy:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fbestbuy.com%2Fsite%2Fsearchpage.jsp%3Fst%3Dacer%2Bswift&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743618123474%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=rWV78001obgBAnoiVa0wup%2Bt9RLIru6dvpUZR8zkgnQ%3D&reserved=0", amazonDE:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.de%2Fs%3Fk%3Dacer%2Bswift%2Bgo&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743618186450%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=D6eBKK06rzWbi5VKbaDu5LY%2FM%2BzuDt4CO4n%2BDy41GNk%3D&reserved=0", mediamarkt:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.mediamarkt.de%2Fde%2Fsearch.html%3Fquery%3Dacer%2Bswift%2Bgo&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743618252511%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=4oqj1IL%2F4UzsfotGjkYcTa4Sw4QVjAYdwHjFF68V95Q%3D&reserved=0"}},
+      {name: "Microsoft Surface Laptop 7", os:"windows", priceUSD:999, priceEUR:949, weight:1.34, battery:14, screen:"13.8\"", color:"Sage", image:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fpicsum.photos%2Fid%2F180%2F800%2F600&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743618345502%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=QXj2pj517ZnFHYBmI3G3ZhAgH4q7tjiVJZvigGjiQIk%3D&reserved=0", pros:"Beautiful design", links:{amazonUS:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.com%2Fs%3Fk%3Dsurface%2Blaptop%2B7%26tag%3DYOURTAG&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743618435390%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=WQFEII9%2FPwJBItHuC9s55PsQdo4FDMF%2FXYNKUxKaHbI%3D&reserved=0", bestbuy:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fbestbuy.com%2Fsite%2Fsearchpage.jsp%3Fst%3Dsurface%2Blaptop%2B7&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743618542962%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=0NTy0ahY6Ux8t9AayYuo7mwx2mhIwitBmAGQO5%2FDEVs%3D&reserved=0", amazonDE:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.de%2Fs%3Fk%3Dsurface%2Blaptop%2B7&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743618618561%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=kZRNDHJ0rUqA%2FHeL8r4ToH8WRUNor6dF7caB51MWvr4%3D&reserved=0", mediamarkt:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.mediamarkt.de%2Fde%2Fsearch.html%3Fquery%3Dsurface%2Blaptop%2B7&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743618684642%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=JtrzX8j4I6fVa6dhe38iuilIsMzDcuc%2FlXbsn0quLSs%3D&reserved=0"}},
+      {name: "Lenovo ThinkPad E16", os:"windows", priceUSD:799, priceEUR:749, weight:1.4, battery:12, screen:"16\"", color:"Black", image:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fpicsum.photos%2Fid%2F251%2F800%2F600&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743618749892%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=juGaX3w9OgxF1RVIrMzpYYKwMy8wspQTSOgOVcUMieY%3D&reserved=0", pros:"Reliable for students", links:{amazonUS:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.com%2Fs%3Fk%3Dlenovo%2Bthinkpad%2Be16%26tag%3DYOURTAG&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743618811986%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=1pHZ84Bx2LFR%2FA5udF2VnQ6y2JkS6hSYYsQNfrfNJ2o%3D&reserved=0", bestbuy:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fbestbuy.com%2Fsite%2Fsearchpage.jsp%3Fst%3Dthinkpad&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743618885018%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=ydhL7hEWtdq1rhgTFn1IY1tgOCIJGRKhxV0VssRFwaU%3D&reserved=0", amazonDE:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.de%2Fs%3Fk%3Dlenovo%2Bthinkpad&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743619317524%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=b1OrHl0xbu9A1BZnQZW4Bs7KTsWaODzmOFxLFjpYxyM%3D&reserved=0", mediamarkt:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.mediamarkt.de%2Fde%2Fsearch.html%3Fquery%3Dlenovo%2Bthinkpad&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743619422849%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=8yryDqW5mcP%2BKkAwcYDJD%2Fwgx7qvm4KDkX9KHN8El2Y%3D&reserved=0"}},
+      {name: "Apple MacBook Air 15 M4", os:"macos", priceUSD:1299, priceEUR:1249, weight:1.51, battery:17, screen:"15.3\"", color:"Starlight", image:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fpicsum.photos%2Fid%2F20%2F800%2F600&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743619484490%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=OKW%2Fnh7JgMw6J9iGGOTcMl78kH5npHAy6z6VrohAn5U%3D&reserved=0", pros:"Big screen + battery", links:{amazonUS:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.com%2Fs%3Fk%3Dmacbook%2Bair%2B15%26tag%3DYOURTAG&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743619547925%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=0JqvJpNYxJEbJxJ9CA7l4%2F1Zhnsgyv3Jj63ugLy6L5M%3D&reserved=0", bestbuy:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fbestbuy.com%2Fsite%2Fsearchpage.jsp%3Fst%3Dmacbook%2Bair%2B15&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743619622752%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=F6g8zBhxKq6maGBzr9LheuzP3WoaIXKDlXEEewq07Jg%3D&reserved=0", amazonDE:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.de%2Fs%3Fk%3Dmacbook%2Bair%2B15&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743619703108%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=CF3CSel3cY0ZpoV%2FHaXD0dJqTokNiih2igjLnguQr58%3D&reserved=0", mediamarkt:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.mediamarkt.de%2Fde%2Fsearch.html%3Fquery%3Dmacbook%2Bair%2B15&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743619766407%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=BbbBzibQdM5lLVWBTnifT%2Fhh%2BwoNeutmol%2B0JN8DSgs%3D&reserved=0"}},
+      {name: "HP Pavilion Plus 14", os:"windows", priceUSD:699, priceEUR:649, weight:1.4, battery:13, screen:"14\"", color:"Warm Gold", image:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fpicsum.photos%2Fid%2F60%2F800%2F600&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743619841122%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=NoYkhvyMTHtjOZR63FIVytNfNgJYrf388UOW4cY8ni4%3D&reserved=0", pros:"Stylish & affordable", links:{amazonUS:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.com%2Fs%3Fk%3Dhp%2Bpavilion%2Bplus%2B14%26tag%3DYOURTAG&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743619931817%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=hCSPdyb9XOMCBNeTa%2BE%2B7ZVtE7EWIq5yxY0m%2Bct%2FrWM%3D&reserved=0", bestbuy:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fbestbuy.com%2Fsite%2Fsearchpage.jsp%3Fst%3Dhp%2Bpavilion%2Bplus&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743620034175%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=eDgue44hWW1ranXuFbxnFROM2wS5x6haJBKZVWi9Qtg%3D&reserved=0", amazonDE:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.de%2Fs%3Fk%3Dhp%2Bpavilion%2Bplus&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743620139530%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=NAAxrvEdXaSAze2Vt8vkg13iWZWxrrMaBuu4TYv0YWY%3D&reserved=0", mediamarkt:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.mediamarkt.de%2Fde%2Fsearch.html%3Fquery%3Dhp%2Bpavilion%2Bplus&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743620228785%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=BWH7RZaq%2BUC%2FEnKdYDgQlzdOFWZCegAtZAtiBLlBe2A%3D&reserved=0"}},
+      {name: "ASUS Vivobook S 16", os:"windows", priceUSD:579, priceEUR:529, weight:1.7, battery:10, screen:"16\"", color:"Cool Silver", image:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fpicsum.photos%2Fid%2F133%2F800%2F600&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743620311432%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=3Zy6bqaK3%2BdZPlzZw8B160zRwnO7fWsTVS5rvL91dBA%3D&reserved=0", pros:"Big screen on budget", links:{amazonUS:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.com%2Fs%3Fk%3Dasus%2Bvivobook%2Bs%2B16%26tag%3DYOURTAG&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743620425235%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=xAwizq0CnOudhWF19CE3oVyw92pQMIzKE9TATIgQ7OY%3D&reserved=0", bestbuy:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fbestbuy.com%2Fsite%2Fsearchpage.jsp%3Fst%3Dasus%2Bvivobook&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743620550124%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=gS3BV7kziaR9hulCvlTNj834MDOpAK8FqC3DWmjEGJU%3D&reserved=0", amazonDE:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Famazon.de%2Fs%3Fk%3Dasus%2Bvivobook%2Bs%2B16&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743620623519%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=MCub9KhANEJTVItqn3JJtS3NsUnpH6ZWT%2BaIhmhi0PY%3D&reserved=0", mediamarkt:"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.mediamarkt.de%2Fde%2Fsearch.html%3Fquery%3Dasus%2Bvivobook%2Bs%2B16&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743620692157%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=Hv4SQV%2FRUb3dt0EPg4cniBV7bulYxLcfnoS%2Fl%2F9A76g%3D&reserved=0"}}
+    ];
+
+    function getBestLink(laptop) {
+      if (userCountry === 'DE' || userCurrency === 'EUR') {
+        return laptop.links.mediamarkt || laptop.links.amazonDE;
+      } else {
+        return laptop.links.bestbuy || laptop.links.amazonUS;
+      }
+    }
+
+    function populateMajors() {
+      const container = document.getElementById('majorButtons');
+      container.innerHTML = majors.map(m => `
+        <button data-major="${m.id}" class="major-btn w-full px-6 py-5 rounded-2xl bg-zinc-800 hover:bg-zinc-700 transition-all text-left text-sm md:text-base">
+          ${m.label}
+        </button>
+      `).join('');
+      document.querySelectorAll('.major-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.major-btn').forEach(b => b.classList.remove('bg-emerald-600','text-white','ring-2','ring-emerald-500'));
+          this.classList.add('bg-emerald-600','text-white','ring-2','ring-emerald-500');
+          selectedMajor = this.dataset.major;
+        });
+      });
+    }
+
+    function populateOS() {
+      const container = document.getElementById('osButtons');
+      container.innerHTML = osOptions.map(o => `
+        <button data-os="${o.id}" class="os-btn px-6 py-4 rounded-2xl bg-zinc-800 hover:bg-zinc-700 transition text-center font-medium">
+          ${o.label}
+        </button>
+      `).join('');
+      document.querySelectorAll('.os-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.os-btn').forEach(b => b.classList.remove('bg-emerald-600','text-white'));
+          this.classList.add('bg-emerald-600','text-white');
+          selectedOS = this.dataset.os;
+        });
+      });
+    }
+
+    function populateNeeds() {
+      document.getElementById('needs').innerHTML = needsOptions.map(n => `
+        <label data-need="${n.id}" class="need-btn flex items-center gap-3 p-5 bg-zinc-800 rounded-2xl cursor-pointer hover:bg-zinc-700 transition text-sm">
+          <input type="checkbox" class="w-5 h-5 accent-emerald-500">
+          <span>${n.label}</span>
+        </label>
+      `).join('');
+      document.querySelectorAll('.need-btn').forEach(label => {
+        label.addEventListener('click', function() {
+          const need = this.dataset.need;
+          if (selectedNeeds.includes(need)) {
+            selectedNeeds = selectedNeeds.filter(n => n !== need);
+            this.classList.remove('bg-emerald-600','text-white');
+          } else {
+            selectedNeeds.push(need);
+            this.classList.add('bg-emerald-600','text-white');
+          }
+        });
+      });
+    }
+
+    function initThemeToggle() {
+      const toggle = document.getElementById('themeToggle');
+      const icon = toggle.querySelector('i');
+      toggle.addEventListener('click', () => {
+        document.documentElement.classList.toggle('dark');
+        if (document.documentElement.classList.contains('dark')) {
+          icon.classList.remove('fa-moon'); icon.classList.add('fa-sun');
+        } else {
+          icon.classList.remove('fa-sun'); icon.classList.add('fa-moon');
+        }
+      });
+    }
+
+    function getRecommendations() {
+      if (!selectedMajor) return alert("⚠️ Please select your Field of Study first");
+
+      const budget = parseInt(document.getElementById('budget').value);
+      const isEUR = userCurrency === 'EUR';
+
+      let results = laptops
+        .filter(l => (isEUR ? l.priceEUR : l.priceUSD) <= budget + 500)
+        .filter(l => selectedOS === "any" || l.os === selectedOS);
+
+      results = results.map(l => {
+        let score = 75;
+        if (selectedMajor === "engineering" && l.name.includes("ThinkPad")) score += 18;
+        if (selectedMajor === "design" && l.name.includes("MacBook")) score += 18;
+        if (selectedMajor === "learning" && l.battery > 13) score += 12;
+        if (selectedNeeds.includes("portable") && l.weight < 1.4) score += 10;
+        if (selectedNeeds.includes("battery") && l.battery > 14) score += 10;
+        return {...l, matchScore: Math.min(99, score)};
+      }).sort((a,b) => b.matchScore - a.matchScore);
+
+      renderResults(results.slice(0, 6));
+    }
+
+    function renderResults(results) {
+      document.getElementById('quiz').classList.add('hidden');
+      document.getElementById('results').classList.remove('hidden');
+
+      const container = document.getElementById('recommendations');
+      container.innerHTML = results.map(l => {
+        const price = userCurrency === 'EUR' ? l.priceEUR : l.priceUSD;
+        return `
+          <div onclick="showLaptopDetail('${l.name}')" class="bg-zinc-900 rounded-3xl p-6 hover:scale-105 transition cursor-pointer">
+            <img src="${l.image}" class="w-full h-48 object-cover rounded-2xl mb-6" alt="${l.name}">
+            <h3 class="font-bold text-xl">${l.name}</h3>
+            <p class="text-emerald-400 text-sm">${l.color}</p>
+            <p class="text-3xl font-semibold text-emerald-400 mt-2">${userCurrency === 'EUR' ? '€' : '$'}${price}</p>
+            <p class="text-zinc-400 my-4 text-sm">${l.pros}</p>
+            <button class="w-full bg-white text-zinc-900 py-3 rounded-2xl font-semibold">See All Offers →</button>
+          </div>`;
+      }).join('');
+    }
+
+    function showLaptopDetail(name) {
+      const laptop = laptops.find(l => l.name === name);
+      if (!laptop) return;
+
+      const price = userCurrency === 'EUR' ? laptop.priceEUR : laptop.priceUSD;
+      const symbol = userCurrency === 'EUR' ? '€' : '$';
+
+      const html = `
+        <h2 class="text-2xl font-bold mb-6">${laptop.name}</h2>
+        <img src="${laptop.image}" class="w-full rounded-2xl mb-6">
+        <p class="text-4xl font-semibold mb-6">${symbol}${price} • ${laptop.color}</p>
+
+        <div class="space-y-4 mb-8">
+          <a href="${laptop.links.mediamarkt || '#'}" target="_blank" class="block p-4 bg-zinc-800 rounded-2xl hover:bg-zinc-700">🛒 MediaMarkt (Germany / EU)</a>
+          <a href="${laptop.links.amazonDE || '#'}" target="_blank" class="block p-4 bg-zinc-800 rounded-2xl hover:bg-zinc-700">🛒 Amazon.de</a>
+          <a href="${laptop.links.bestbuy || '#'}" target="_blank" class="block p-4 bg-zinc-800 rounded-2xl hover:bg-zinc-700">🛒 Best Buy (US)</a>
+          <a href="${laptop.links.amazonUS || '#'}" target="_blank" class="block p-4 bg-zinc-800 rounded-2xl hover:bg-zinc-700">🛒 Amazon.com</a>
+        </div>
+
+        <button onclick="closeModal()" class="w-full py-4 border border-zinc-600 rounded-2xl hover:bg-zinc-800 text-lg">← Go Back</button>
+      `;
+
+      document.getElementById('modalContent').innerHTML = html;
+      document.getElementById('detailModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('detailModal').classList.add('hidden');
+    }
+
+    function shareOnX() {
+      const text = "I just found my perfect student laptop using StudyLaptop.com! 🎓";
+      const url = window.location.href;
+      window.open(`https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Ftwitter.com%2Fintent%2Ftweet%3Ftext%3D%24&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743620779594%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=h7UUt56027khVCHAjDTYco2NxdPMT%2BfevVZb%2B6BQfZI%3D&reserved=0{encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+    }
+
+    function shareOnFacebook() {
+      const url = window.location.href;
+      window.open(`https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.facebook.com%2Fsharer%2Fsharer.php%3Fu%3D%24&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743620851876%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=uQGGgC6QJBjNHWgLQ3LIoPqtEwGjz%2BLRVUrfTMcl9JU%3D&reserved=0{encodeURIComponent(url)}`, '_blank');
+    }
+
+    function copyLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => alert("✅ Link copied!"));
+    }
+
+    function resetQuiz() {
+      document.getElementById('quiz').classList.remove('hidden');
+      document.getElementById('results').classList.add('hidden');
+      selectedMajor = null; selectedOS = "any"; selectedNeeds = [];
+      document.querySelectorAll('.major-btn, .os-btn, .need-btn').forEach(el => el.classList.remove('bg-emerald-600','text-white','ring-2','ring-emerald-500'));
+    }
+
+    function updateLastUpdated() {
+      const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+      const now = new Date();
+      document.getElementById('lastUpdated').textContent = `${months[now.getMonth()]} ${now.getFullYear()}`;
+    }
+
+    async function detectLocation() {
+      try {
+        const res = await fetch('https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fipapi.co%2Fjson%2F&data=05%7C02%7Csrdjan.antonijevic%40lis.school%7C60ce1b6555b94a31dc4008deb0074098%7C81557573fa0c44899e98572ebd403ed1%7C0%7C0%7C639141743620925324%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=dtKx0b%2B3UMQll%2FURiSNs1kHide%2Bg0%2FMbFdnp4PY3FU8%3D&reserved=0');
+        const data = await res.json();
+        userCountry = data.country_code || 'US';
+        userCurrency = ['DE','AT','FR','IT','ES','NL','BE'].includes(userCountry) ? 'EUR' : 'USD';
+      } catch(e) {}
+    }
+
+    // Initialize
+    window.onload = async () => {
+      await detectLocation();
+      populateMajors();
+      populateOS();
+      populateNeeds();
+      initThemeToggle();
+      updateLastUpdated();
+
+      document.getElementById('budget').addEventListener('input', function() {
+        const val = this.value;
+        document.getElementById('budgetValue').textContent =
+          userCurrency === 'EUR' ? `€${Math.round(val * 0.92)}` : `$${val}`;
+      });
+    };
+  </script>
+</body>
+</html>
