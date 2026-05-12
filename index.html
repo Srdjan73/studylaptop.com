@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyLaptop.com • Student Laptop Matcher</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body class="bg-zinc-950 text-zinc-100 transition-colors">
+  <div class="max-w-7xl mx-auto p-4 md:p-6">
+   
+    <!-- Header -->
+    <header class="text-center py-8 md:py-12 border-b border-zinc-800">
+      <h1 class="text-4xl md:text-5xl font-bold mb-3">🎓 StudyLaptop.com</h1>
+      <h2 class="text-2xl md:text-3xl font-semibold text-emerald-400 mb-4">Student Laptop Matcher & Budget Optimizer</h2>
+      <p class="max-w-2xl mx-auto text-zinc-400 text-base md:text-lg">
+        Find the perfect laptop for your major, budget, and campus life in seconds.
+      </p>
+    </header>
+
+    <!-- Quiz -->
+    <div id="quiz" class="max-w-3xl mx-auto mt-10">
+      <div class="bg-zinc-900 rounded-3xl p-6 md:p-10">
+        <div class="flex justify-end mb-6">
+          <button id="themeToggle" class="p-3 rounded-2xl bg-zinc-800 hover:bg-zinc-700 transition">
+            <i class="fas fa-moon text-xl"></i>
+          </button>
+        </div>
+
+        <h2 class="text-2xl md:text-3xl font-semibold mb-8 text-center">Tell us about your studies</h2>
+       
+        <div class="space-y-8 md:space-y-10">
+          <div>
+            <label class="block text-sm mb-3">Your Budget</label>
+            <input type="range" id="budget" min="400" max="2500" value="950" step="50" class="w-full accent-emerald-500">
+            <div class="flex justify-between text-sm mt-1 text-zinc-400">
+              <span>$400 / €370</span>
+              <span id="budgetValue" class="font-semibold">$950 / €880</span>
+              <span>$2500+ / €2300+</span>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm mb-3">Your Field of Study <span class="text-emerald-400">(multiple possible)</span></label>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-3" id="majorButtons"></div>
+          </div>
+
+          <div>
+            <label class="block text-sm mb-3">Preferred Operating System</label>
+            <div class="grid grid-cols-3 gap-3" id="osButtons"></div>
+          </div>
+
+          <div>
+            <label class="block text-sm mb-3">Must-haves (select all)</label>
+            <div class="grid grid-cols-2 gap-3" id="needs"></div>
+          </div>
+
+          <button onclick="getRecommendations()" class="w-full bg-emerald-600 hover:bg-emerald-500 py-6 rounded-3xl text-lg md:text-xl font-semibold transition">
+            Show My Recommendations →
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div id="results" class="hidden mt-12 md:mt-16">
+      <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">Your Top Recommendations</h2>
+      <div id="recommendations" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"></div>
+
+      <div class="mt-12 flex flex-wrap justify-center gap-4">
+        <button onclick="shareOnX()" class="flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 px-6 py-3 rounded-2xl transition">
+          <i class="fab fa-x-twitter"></i> X
+        </button>
+        <button onclick="shareOnFacebook()" class="flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 px-6 py-3 rounded-2xl transition">
+          <i class="fab fa-facebook-f"></i> Facebook
+        </button>
+        <button onclick="copyLink()" class="flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 px-6 py-3 rounded-2xl transition">
+          <i class="fas fa-link"></i> Copy Link
+        </button>
+      </div>
+
+      <div class="text-center mt-10">
+        <button onclick="resetQuiz()" class="text-emerald-400 hover:text-emerald-300">← Start Over</button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center text-zinc-500 text-sm mt-20 border-t border-zinc-800 pt-8">
+      <p>Last updated: <span id="lastUpdated"></span></p>
+      <p class="mt-4 text-xs">
+        This website participates in the Amazon Associates Program.
+        We may earn a commission from qualifying purchases at no extra cost to you.
+      </p>
+    </footer>
+  </div>
+
+  <!-- Laptop Detail Modal -->
+  <div id="detailModal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+    <div class="bg-zinc-900 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-auto">
+      <div class="p-6">
+        <button onclick="closeModal()" class="float-right text-3xl text-zinc-400 hover:text-white">&times;</button>
+        <div id="modalContent"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let selectedMajor = [];
+    let selectedOS = "any";
+    let selectedNeeds = [];
+    let userCurrency = 'USD';
+    let userCountry = 'US';
+
+    const majors = [
+      {id: "general", label: "General / Business"},
+      {id: "engineering", label: "Engineering / CS"},
+      {id: "design", label: "Design / Creative"},
+      {id: "learning", label: "Learning / Teaching"},
+      {id: "other", label: "Other"}
+    ];
+
+    const osOptions = [
+      {id: "any", label: "Any"},
+      {id: "windows", label: "Windows"},
+      {id: "macos", label: "macOS"}
+    ];
+
+    const needsOptions = [
+      {id:"portable", label:"Very lightweight (<1.4kg)"},
+      {id:"battery", label:"Long battery life"},
+      {id:"power", label:"Powerful processor"},
+      {id:"screen", label:"Specific screen size"},
+      {id:"touch", label:"Touch / 2-in-1"},
+      {id:"keyboard", label:"Specific keyboard layout"},
+      {id:"size", label:"Large screen (>15\")"}
+    ];
+
+    const laptops = [
+      {name: "Apple MacBook Air 13 M4", os:"macos", priceUSD:999, priceEUR:949, weight:1.24, battery:18, screen:"13.6\"", color:"Midnight", image:"https://picsum.photos/id/20/800/600", pros:"Best battery & build", links:{amazonUS:"https://amazon.com/s?k=macbook+air+m4&tag=studylaptop20-20", bestbuy:"https://bestbuy.com/site/searchpage.jsp?st=macbook+air+m4", amazonDE:"https://amazon.de/s?k=macbook+air+m4", mediamarkt:"https://www.mediamarkt.de/de/search.html?query=macbook+air+m4"}},
+      {name: "Apple MacBook Pro 14 M4", os:"macos", priceUSD:1599, priceEUR:1499, weight:1.55, battery:16, screen:"14.2\"", color:"Space Black", image:"https://picsum.photos/id/201/800/600", pros:"Powerful for creative work", links:{amazonUS:"https://amazon.com/s?k=macbook+pro+m4&tag=studylaptop20-20", bestbuy:"https://bestbuy.com/site/searchpage.jsp?st=macbook+pro", amazonDE:"https://amazon.de/s?k=macbook+pro+m4", mediamarkt:"https://www.mediamarkt.de/de/search.html?query=macbook+pro+m4"}},
+      {name: "Lenovo Yoga Slim 7i", os:"windows", priceUSD:899, priceEUR:849, weight:1.35, battery:15, screen:"14\"", color:"Storm Grey", image:"https://picsum.photos/id/180/800/600", pros:"Excellent 2-in-1", links:{amazonUS:"https://amazon.com/s?k=lenovo+yoga+slim+7i&tag=studylaptop20-20", bestbuy:"https://bestbuy.com/site/searchpage.jsp?st=lenovo+yoga", amazonDE:"https://amazon.de/s?k=lenovo+yoga+7i", mediamarkt:"https://www.mediamarkt.de/de/search.html?query=lenovo+yoga+7i"}},
+      {name: "HP OmniBook 5 14", os:"windows", priceUSD:749, priceEUR:699, weight:1.35, battery:13, screen:"14\"", color:"Silver", image:"https://picsum.photos/id/251/800/600", pros:"Great value", links:{amazonUS:"https://amazon.com/s?k=hp+omnibook+5&tag=studylaptop20-20", bestbuy:"https://bestbuy.com/site/searchpage.jsp?st=hp+omnibook", amazonDE:"https://amazon.de/s?k=hp+omnibook", mediamarkt:"https://www.mediamarkt.de/de/search.html?query=hp+omnibook"}},
+      {name: "ASUS Zenbook 14 OLED", os:"windows", priceUSD:1099, priceEUR:1049, weight:1.2, battery:15, screen:"14\"", color:"Navy Blue", image:"https://picsum.photos/id/60/800/600", pros:"Stunning OLED", links:{amazonUS:"https://amazon.com/s?k=asus+zenbook+14&tag=studylaptop20-20", bestbuy:"https://bestbuy.com/site/searchpage.jsp?st=asus+zenbook", amazonDE:"https://amazon.de/s?k=asus+zenbook+14", mediamarkt:"https://www.mediamarkt.de/de/search.html?query=asus+zenbook"}},
+      {name: "Dell XPS 13", os:"windows", priceUSD:1199, priceEUR:1149, weight:1.17, battery:12, screen:"13.4\"", color:"Platinum", image:"https://picsum.photos/id/133/800/600", pros:"Premium Windows", links:{amazonUS:"https://amazon.com/s?k=dell+xps+13&tag=studylaptop20-20", bestbuy:"https://bestbuy.com/site/searchpage.jsp?st=dell+xps+13", amazonDE:"https://amazon.de/s?k=dell+xps+13", mediamarkt:"https://www.mediamarkt.de/de/search.html?query=dell+xps+13"}},
+      {name: "Acer Swift Go 14", os:"windows", priceUSD:649, priceEUR:599, weight:1.3, battery:11, screen:"14\"", color:"Gray", image:"https://picsum.photos/id/201/800/600", pros:"Best budget", links:{amazonUS:"https://amazon.com/s?k=acer+swift+go&tag=studylaptop20-20", bestbuy:"https://bestbuy.com/site/searchpage.jsp?st=acer+swift", amazonDE:"https://amazon.de/s?k=acer+swift+go", mediamarkt:"https://www.mediamarkt.de/de/search.html?query=acer+swift+go"}},
+      {name: "Microsoft Surface Laptop 7", os:"windows", priceUSD:999, priceEUR:949, weight:1.34, battery:14, screen:"13.8\"", color:"Sage", image:"https://picsum.photos/id/180/800/600", pros:"Beautiful design", links:{amazonUS:"https://amazon.com/s?k=surface+laptop+7&tag=studylaptop20-20", bestbuy:"https://bestbuy.com/site/searchpage.jsp?st=surface+laptop+7", amazonDE:"https://amazon.de/s?k=surface+laptop+7", mediamarkt:"https://www.mediamarkt.de/de/search.html?query=surface+laptop+7"}},
+      {name: "Lenovo ThinkPad E16", os:"windows", priceUSD:799, priceEUR:749, weight:1.4, battery:12, screen:"16\"", color:"Black", image:"https://picsum.photos/id/251/800/600", pros:"Reliable for students", links:{amazonUS:"https://amazon.com/s?k=lenovo+thinkpad+e16&tag=studylaptop20-20", bestbuy:"https://bestbuy.com/site/searchpage.jsp?st=thinkpad", amazonDE:"https://amazon.de/s?k=lenovo+thinkpad", mediamarkt:"https://www.mediamarkt.de/de/search.html?query=lenovo+thinkpad"}},
+      {name: "Apple MacBook Air 15 M4", os:"macos", priceUSD:1299, priceEUR:1249, weight:1.51, battery:17, screen:"15.3\"", color:"Starlight", image:"https://picsum.photos/id/20/800/600", pros:"Big screen + battery", links:{amazonUS:"https://amazon.com/s?k=macbook+air+15&tag=studylaptop20-20", bestbuy:"https://bestbuy.com/site/searchpage.jsp?st=macbook+air+15", amazonDE:"https://amazon.de/s?k=macbook+air+15", mediamarkt:"https://www.mediamarkt.de/de/search.html?query=macbook+air+15"}},
+      {name: "HP Pavilion Plus 14", os:"windows", priceUSD:699, priceEUR:649, weight:1.4, battery:13, screen:"14\"", color:"Warm Gold", image:"https://picsum.photos/id/60/800/600", pros:"Stylish & affordable", links:{amazonUS:"https://amazon.com/s?k=hp+pavilion+plus+14&tag=studylaptop20-20", bestbuy:"https://bestbuy.com/site/searchpage.jsp?st=hp+pavilion+plus", amazonDE:"https://amazon.de/s?k=hp+pavilion+plus", mediamarkt:"https://www.mediamarkt.de/de/search.html?query=hp+pavilion+plus"}},
+      {name: "ASUS Vivobook S 16", os:"windows", priceUSD:579, priceEUR:529, weight:1.7, battery:10, screen:"16\"", color:"Cool Silver", image:"https://picsum.photos/id/133/800/600", pros:"Big screen on budget", links:{amazonUS:"https://amazon.com/s?k=asus+vivobook+s+16&tag=studylaptop20-20", bestbuy:"https://bestbuy.com/site/searchpage.jsp?st=asus+vivobook", amazonDE:"https://amazon.de/s?k=asus+vivobook+s+16", mediamarkt:"https://www.mediamarkt.de/de/search.html?query=asus+vivobook+s+16"}}
+    ];
+
+    function getBestLink(laptop) {
+      if (userCountry === 'DE' || userCurrency === 'EUR') {
+        return laptop.links.mediamarkt || laptop.links.amazonDE;
+      } else {
+        return laptop.links.bestbuy || laptop.links.amazonUS;
+      }
+    }
+
+    function populateMajors() {
+      const container = document.getElementById('majorButtons');
+      container.innerHTML = majors.map(m => `
+        <button data-major="${m.id}" class="major-btn w-full px-6 py-5 rounded-2xl bg-zinc-800 hover:bg-zinc-700 transition-all text-left text-sm md:text-base">
+          ${m.label}
+        </button>
+      `).join('');
+      document.querySelectorAll('.major-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const id = this.dataset.major;
+          if (selectedMajor.includes(id)) {
+            selectedMajor = selectedMajor.filter(m => m !== id);
+            this.classList.remove('bg-emerald-600','text-white','ring-2','ring-emerald-500');
+          } else {
+            selectedMajor.push(id);
+            this.classList.add('bg-emerald-600','text-white','ring-2','ring-emerald-500');
+          }
+        });
+      });
+    }
+
+    function populateOS() {
+      const container = document.getElementById('osButtons');
+      container.innerHTML = osOptions.map(o => `
+        <button data-os="${o.id}" class="os-btn px-6 py-4 rounded-2xl bg-zinc-800 hover:bg-zinc-700 transition text-center font-medium">
+          ${o.label}
+        </button>
+      `).join('');
+      document.querySelectorAll('.os-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.os-btn').forEach(b => b.classList.remove('bg-emerald-600','text-white'));
+          this.classList.add('bg-emerald-600','text-white');
+          selectedOS = this.dataset.os;
+        });
+      });
+    }
+
+    function populateNeeds() {
+      document.getElementById('needs').innerHTML = needsOptions.map(n => `
+        <label data-need="${n.id}" class="need-btn flex items-center gap-3 p-5 bg-zinc-800 rounded-2xl cursor-pointer hover:bg-zinc-700 transition text-sm">
+          <input type="checkbox" class="w-5 h-5 accent-emerald-500">
+          <span>${n.label}</span>
+        </label>
+      `).join('');
+      document.querySelectorAll('.need-btn').forEach(label => {
+        label.addEventListener('click', function() {
+          const need = this.dataset.need;
+          if (selectedNeeds.includes(need)) {
+            selectedNeeds = selectedNeeds.filter(n => n !== need);
+            this.classList.remove('bg-emerald-600','text-white');
+          } else {
+            selectedNeeds.push(need);
+            this.classList.add('bg-emerald-600','text-white');
+          }
+        });
+      });
+    }
+
+    function initThemeToggle() {
+      const toggle = document.getElementById('themeToggle');
+      const icon = toggle.querySelector('i');
+      toggle.addEventListener('click', () => {
+        document.documentElement.classList.toggle('dark');
+        if (document.documentElement.classList.contains('dark')) {
+          icon.classList.remove('fa-moon'); icon.classList.add('fa-sun');
+        } else {
+          icon.classList.remove('fa-sun'); icon.classList.add('fa-moon');
+        }
+      });
+    }
+
+    function getRecommendations() {
+      if (selectedMajor.length === 0) return alert("⚠️ Please select at least one Field of Study");
+
+      const budget = parseInt(document.getElementById('budget').value);
+      const isEUR = userCurrency === 'EUR';
+
+      let results = laptops
+        .filter(l => (isEUR ? l.priceEUR : l.priceUSD) <= budget + 500)
+        .filter(l => selectedOS === "any" || l.os === selectedOS);
+
+      results = results.map(l => {
+        let score = 75;
+        if (selectedMajor.some(m => m === "engineering") && l.name.includes("ThinkPad")) score += 18;
+        if (selectedMajor.some(m => m === "design") && l.name.includes("MacBook")) score += 18;
+        if (selectedMajor.some(m => m === "learning") && l.battery > 13) score += 12;
+        if (selectedNeeds.includes("portable") && l.weight < 1.4) score += 10;
+        if (selectedNeeds.includes("battery") && l.battery > 14) score += 10;
+        return {...l, matchScore: Math.min(99, score)};
+      }).sort((a,b) => b.matchScore - a.matchScore);
+
+      renderResults(results.slice(0, 6));
+    }
+
+    function renderResults(results) {
+      document.getElementById('quiz').classList.add('hidden');
+      document.getElementById('results').classList.remove('hidden');
+
+      const container = document.getElementById('recommendations');
+      container.innerHTML = results.map(l => {
+        const price = userCurrency === 'EUR' ? l.priceEUR : l.priceUSD;
+        return `
+          <div onclick="showLaptopDetail('${l.name}')" class="bg-zinc-900 rounded-3xl p-6 hover:scale-105 transition cursor-pointer">
+            <img src="${l.image}" class="w-full h-48 object-cover rounded-2xl mb-6" alt="${l.name}">
+            <h3 class="font-bold text-xl">${l.name}</h3>
+            <p class="text-emerald-400 text-sm">${l.color}</p>
+            <p class="text-3xl font-semibold text-emerald-400 mt-2">${userCurrency === 'EUR' ? '€' : '$'}${price}</p>
+            <p class="text-zinc-400 my-4 text-sm">${l.pros}</p>
+            <button class="w-full bg-white text-zinc-900 py-3 rounded-2xl font-semibold">See All Offers →</button>
+          </div>`;
+      }).join('');
+    }
+
+    function showLaptopDetail(name) {
+      const laptop = laptops.find(l => l.name === name);
+      if (!laptop) return;
+
+      const price = userCurrency === 'EUR' ? laptop.priceEUR : laptop.priceUSD;
+      const symbol = userCurrency === 'EUR' ? '€' : '$';
+
+      const html = `
+        <h2 class="text-2xl font-bold mb-6">${laptop.name}</h2>
+        <img src="${laptop.image}" class="w-full rounded-2xl mb-6">
+        <p class="text-4xl font-semibold mb-6">${symbol}${price} • ${laptop.color}</p>
+       
+        <div class="space-y-4 mb-8">
+          <a href="${laptop.links.mediamarkt || '#'}" target="_blank" class="block p-4 bg-zinc-800 rounded-2xl hover:bg-zinc-700">🛒 MediaMarkt (Germany / EU)</a>
+          <a href="${laptop.links.amazonDE || '#'}" target="_blank" class="block p-4 bg-zinc-800 rounded-2xl hover:bg-zinc-700">🛒 Amazon.de</a>
+          <a href="${laptop.links.bestbuy || '#'}" target="_blank" class="block p-4 bg-zinc-800 rounded-2xl hover:bg-zinc-700">🛒 Best Buy (US)</a>
+          <a href="${laptop.links.amazonUS || '#'}" target="_blank" class="block p-4 bg-zinc-800 rounded-2xl hover:bg-zinc-700">🛒 Amazon.com</a>
+        </div>
+
+        <button onclick="closeModal()" class="w-full py-4 border border-zinc-600 rounded-2xl hover:bg-zinc-800 text-lg">← Go Back</button>
+      `;
+
+      document.getElementById('modalContent').innerHTML = html;
+      document.getElementById('detailModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('detailModal').classList.add('hidden');
+    }
+
+    function shareOnX() {
+      const text = "I just found my perfect student laptop using StudyLaptop.com! 🎓";
+      const url = window.location.href;
+      window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+    }
+
+    function shareOnFacebook() {
+      const url = window.location.href;
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+    }
+
+    function copyLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => alert("✅ Link copied!"));
+    }
+
+    function resetQuiz() {
+      document.getElementById('quiz').classList.remove('hidden');
+      document.getElementById('results').classList.add('hidden');
+      selectedMajor = []; selectedOS = "any"; selectedNeeds = [];
+      document.querySelectorAll('.major-btn, .os-btn, .need-btn').forEach(el => el.classList.remove('bg-emerald-600','text-white','ring-2','ring-emerald-500'));
+    }
+
+    function updateLastUpdated() {
+      const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+      const now = new Date();
+      document.getElementById('lastUpdated').textContent = `${months[now.getMonth()]} ${now.getFullYear()}`;
+    }
+
+    async function detectLocation() {
+      try {
+        const res = await fetch('https://ipapi.co/json/');
+        const data = await res.json();
+        userCountry = data.country_code || 'US';
+        userCurrency = ['DE','AT','FR','IT','ES','NL','BE'].includes(userCountry) ? 'EUR' : 'USD';
+      } catch(e) {}
+    }
+
+    // Initialize
+    window.onload = async () => {
+      await detectLocation();
+      populateMajors();
+      populateOS();
+      populateNeeds();
+      initThemeToggle();
+      updateLastUpdated();
+
+      document.getElementById('budget').addEventListener('input', function() {
+        const val = this.value;
+        document.getElementById('budgetValue').textContent =
+          userCurrency === 'EUR' ? `€${Math.round(val * 0.92)}` : `$${val}`;
+      });
+    };
+  </script>
+</body>
+</html>
