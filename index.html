@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>StudyLaptop.com • Best Student Laptops 2026</title>
+<meta name="description" content="Find the best student laptop for your studies, budget and needs.">
+
+<!-- SEO -->
+<link rel="canonical" href="https://studylaptop.com/">
+<meta property="og:title" content="StudyLaptop.com - Best Student Laptops 2026">
+<meta property="og:description" content="Find the best laptop for your studies in seconds.">
+<meta property="og:type" content="website">
+
+<!-- CookieYes -->
+<script id="cookieyes" src="https://cdn-cookieyes.com/client_data/eba4867a8579717b8651f8e0/script.js"></script>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-45S49P87JJ"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-45S49P87JJ');
+</script>
+
+<!-- AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3698071056074058"
+crossorigin="anonymous"></script>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body class="bg-zinc-950 text-white">
+
+<div class="max-w-6xl mx-auto p-4">
+
+<!-- HEADER -->
+<header class="text-center py-10 border-b border-zinc-800">
+  <h1 class="text-5xl font-bold">🎓 StudyLaptop.com</h1>
+  <p class="text-emerald-400 text-xl mt-2">Best Student Laptops 2026</p>
+</header>
+
+<!-- QUIZ -->
+<section id="quiz" class="mt-10 bg-zinc-900 p-6 rounded-2xl">
+
+<h2 class="text-2xl mb-4">Find your perfect laptop</h2>
+
+<label>Budget (€)</label>
+<input id="budget" type="range" min="400" max="2500" value="1000" class="w-full">
+
+<div class="mt-6">
+<button onclick="runQuiz()" class="bg-emerald-600 px-6 py-3 rounded-xl">Show Results</button>
+</div>
+
+</section>
+
+<!-- RESULTS -->
+<section id="results" class="hidden mt-10"></section>
+
+<!-- NEWSLETTER -->
+<section class="mt-12 bg-zinc-900 p-6 rounded-2xl">
+<h3 class="text-xl mb-2">Get laptop deals</h3>
+
+<form action="https://formspree.io/f/xlgzvpzz" method="POST" class="flex gap-2">
+<input type="email" name="email" required placeholder="Your email"
+class="w-full p-3 rounded-xl text-black">
+<button class="bg-emerald-600 px-6 rounded-xl">Join</button>
+</form>
+
+</section>
+
+<!-- FOOTER -->
+<footer class="text-center mt-10 text-gray-500 text-sm">
+© 2026 StudyLaptop.com
+</footer>
+
+</div>
+
+<!-- MODAL -->
+<div id="modal" class="hidden fixed inset-0 bg-black/80 p-4" role="dialog" aria-modal="true">
+<div class="bg-zinc-900 max-w-xl mx-auto p-6 rounded-xl">
+<button onclick="closeModal()" aria-label="Close modal" class="text-right w-full text-xl">✖</button>
+<div id="modalContent"></div>
+</div>
+</div>
+
+<script>
+const laptops = [
+  {name:"MacBook Air M4", price:999, rating:4.9, tag:"Top Pick", img:"https://store.storeimages.cdn-apple.com/macbook-air.jpg"},
+  {name:"Dell XPS 13", price:1199, rating:4.7, tag:"Best Value", img:"https://i.dell.com/xps13.jpg"},
+  {name:"Lenovo Yoga Slim 7", price:899, rating:4.6, tag:"", img:"https://lenovo.com/yoga.jpg"}
+];
+
+function runQuiz(){
+  const budget = document.getElementById('budget').value;
+  const results = laptops.filter(l => l.price <= budget);
+  showResults(results);
+}
+
+function showResults(list){
+  document.getElementById('quiz').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+
+  document.getElementById('results').innerHTML =
+  list.map(l => `
+    <div class="bg-zinc-900 p-4 rounded-xl mb-4 cursor-pointer" onclick="openModal('${l.name}')">
+      <img src="${l.img}" class="rounded-xl mb-2">
+      <h3 class="text-xl">${l.name}</h3>
+      <p>€${l.price}</p>
+      <p>⭐ ${l.rating}</p>
+      ${l.tag ? `<span class="text-emerald-400">${l.tag}</span>` : ""}
+    </div>
+  `).join('');
+}
+
+function openModal(name){
+  const laptop = laptops.find(l => l.name === name);
+
+  document.getElementById('modalContent').innerHTML = `
+    <h2 class="text-2xl mb-2">${laptop.name}</h2>
+    <p>Price: €${laptop.price}</p>
+    <p>Rating: ⭐ ${laptop.rating}</p>
+    <a class="text-emerald-400" href="https://amazon.com/?tag=studylaptop20-20" target="_blank">Check Offer</a>
+  `;
+
+  document.getElementById('modal').classList.remove('hidden');
+  trapFocus();
+}
+
+function closeModal(){
+  document.getElementById('modal').classList.add('hidden');
+}
+
+document.addEventListener('keydown', e=>{
+  if(e.key==="Escape") closeModal();
+});
+
+function trapFocus(){
+  const modal = document.getElementById('modal');
+  modal.focus();
+}
+</script>
+
+</body>
+</html>
